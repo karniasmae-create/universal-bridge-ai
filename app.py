@@ -182,3 +182,4 @@ with st.expander("📜 Voir l'historique"):
     for h in reversed(st.session_state.history):
 
         st.write(f"**Vers {h['l']}** : {h['res']} *(Source: {h['src']}...)*")
+
