@@ -1,0 +1,13 @@
+streamlit
+transformers
+torch
+edge-tts
+easyocr
+langdetect
+streamlit-folium
+folium
+streamlit-mic-recorder
+pillow
+numpy
+python-docx
+pymupdf
