@@ -60,9 +60,10 @@ def apply_design(bg_file):
 
 @st.cache_resource
 def load_ai_engine():
-    tok = AutoTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
+    # Ajout d'un paramètre legacy pour éviter l'erreur Python 3.13
+    tok = AutoTokenizer.from_pretrained("facebook/nllb-200-distilled-600M", use_fast=False)
     mod = AutoModelForSeq2SeqLM.from_pretrained("facebook/nllb-200-distilled-600M")
-    ocr = easyocr.Reader(['fr', 'en', 'es', 'tr'])
+    ocr = easyocr.Reader(['fr', 'en', 'es', 'tr'], gpu=False) # Désactive GPU pour le cloud gratuit
     return tok, mod, ocr
 
 async def generate_voice(text, voice_name, file_name):
@@ -179,4 +180,5 @@ with col_right:
 st.divider()
 with st.expander("📜 Voir l'historique"):
     for h in reversed(st.session_state.history):
+
         st.write(f"**Vers {h['l']}** : {h['res']} *(Source: {h['src']}...)*")
